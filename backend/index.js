@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 require("dotenv").config() 
 const authRoutes=require("./routes/auth.js")
 const productRoutes=require("./routes/product.js")
-const cartRoutes=require("./routes/cart.js")
+const cartRoutes=require("./routes/Cart.js")
 const app = express() 
 const port=4000
 
