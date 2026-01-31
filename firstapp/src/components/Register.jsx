@@ -18,12 +18,26 @@ export default function Register() {
     console.log(import.meta.env)
 console.log(import.meta.env.VITE_API_BACKEND)
 
-    axios.post("http://localhost:4000/api/create-user",newUser)
+    axios.post("https://react-5af8.onrender.com/api/create-user",newUser)
       .then((res)=>{
         console.log(res.data)
         if(res.data.status===201){
+          alert("register successful")
+          Swal.fire({
+  title: "Good job!",
+  text: "Registration successful",
+  icon: "success"
+          });
           navigate("/login")
         }
+      })
+      .catch((err)=>{
+        alert("got the error while registering open console and check the response data")
+        Swal.fire({
+  title: "Error!",
+  text: "Registration failed",
+  icon: "error"
+        });
       })
 
     setName("")
@@ -69,6 +83,3 @@ console.log(import.meta.env.VITE_API_BACKEND)
     </div>
   )
 }
-
-
-// name email password mobile address

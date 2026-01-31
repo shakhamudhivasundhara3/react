@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 export default function AddProduct() {
     const [name,setName]=useState("")
     const [price,setPrice]=useState("")
@@ -9,16 +10,22 @@ export default function AddProduct() {
     const [stock,setStock]=useState("")
     const role=localStorage.getItem("role")
     const navigate=useNavigate()
+
     async function addProduct(e){
         e.preventDefault()
         const newProduct={
             name,price,description,category,stock:Number(stock),role
         }
-        axios.post("http://localhost:4000/api/product/add",newProduct)
+        axios.post("https://react-5af8.onrender.com/api/product/add",newProduct)
           .then((res)=>{
             console.log(res)
             if(res.status==200){
-              alert("Product added successfull")
+              Swal.fire({
+                      title: "Good job!",
+                      text: "Product added successfull",
+                      icon: "success"
+              })
+
               navigate("/")
             }
           })
@@ -39,7 +46,7 @@ export default function AddProduct() {
 
             <div className='mb-3'>
               <label className="form-label">Price </label>
-              <input type="text" className="form-control" name="price" value={price} placeholder="Ex:****" onChange={(e)=>setPrice(e.target.value)}/>
+              <input type="text" className="form-control" name="price" value={price} placeholder="Ex:**" onChange={(e)=>setPrice(e.target.value)}/>
             </div>
             <div className='mb-3'>
               <label className="form-label">Description </label>

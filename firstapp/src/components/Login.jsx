@@ -1,8 +1,8 @@
-
 import React, { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import axios from "axios"
 import "./Login.css"
+import Swal from "sweetalert2"
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -15,7 +15,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/login",
+        "https://react-5af8.onrender.com/api/login",
         newUser
       )
 
@@ -25,7 +25,12 @@ export default function Login() {
         navigate("/")
       }
     } catch (err) {
-      alert(err.response?.data?.message || "Login failed")
+      
+      Swal.fire({
+  title: "Error!",
+  text:  "Login failed",
+  icon: "error"
+      });
     }
   }
 
